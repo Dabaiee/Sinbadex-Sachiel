@@ -16,7 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        {/* Ensure your globals.css file contains the necessary dark mode styles */}
+      </head>
+      <body className={inter.className}>
+        {children}
+        <script src="/theme-toggle.js"></script> {/* Including the theme toggle script */}
+      </body>
     </html>
   );
 }
