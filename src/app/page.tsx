@@ -1,13 +1,11 @@
-import { Button } from "@/components/ui/button";
 import { Dashboard } from "@/template/dashboard";
-import { NavigationMenuDemo } from "@/template/navbar";
-import Image from "next/image";
+import Header from "@/template/header";
+
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      
-      <NavigationMenuDemo />
+    <main className="flex min-h-screen flex-col items-center justify-between p-4">
+      <Header />
       <Dashboard />
       
     </main>

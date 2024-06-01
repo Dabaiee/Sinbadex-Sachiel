@@ -1,6 +1,6 @@
 window.onload = function() {
   const themeButton = document.createElement('button');
-  themeButton.innerHTML = 'Toggle Theme';
+  themeButton.innerHTML = 'Theme';
   themeButton.style.position = 'absolute';
   themeButton.style.top = '10px';
   themeButton.style.right = '10px';

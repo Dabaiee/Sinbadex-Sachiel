@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import ClientComponent from "@/components/client/client-component";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,14 +16,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <head>
         {/* Ensure your globals.css file contains the necessary dark mode styles */}
       </head>
       <body className={inter.className}>
-        {children}
-        <script src="/theme-toggle.js"></script> {/* Including the theme toggle script */}
+        <ClientComponent>{children}</ClientComponent>
       </body>
     </html>
   );
