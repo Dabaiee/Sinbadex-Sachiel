@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ClientComponent from "@/components/client/client-component";
-
+import { headers } from 'next/headers'
+import { cookieToInitialState } from 'wagmi'
+import { config } from '@/config'
+import ContextProvider from '@/context'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,14 +18,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
+  const initialState = cookieToInitialState(config, headers().get('cookie'))
   return (
     <html lang="en">
-      <head>
-        {/* Ensure your globals.css file contains the necessary dark mode styles */}
-      </head>
       <body className={inter.className}>
-        <ClientComponent>{children}</ClientComponent>
+        <ContextProvider initialState={initialState}>{children}</ContextProvider>
       </body>
     </html>
   );

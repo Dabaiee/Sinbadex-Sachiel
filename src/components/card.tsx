@@ -10,7 +10,7 @@ import {
 import { Badge } from './ui/badge';
 const MyCard = () => {
   return (
-    <Card className="bg-dark-blue max-w-lg rounded-lg shadow-md overflow-hidden">
+    <Card className="bg-dark-blue max-w-4xl w-3/4 rounded-lg shadow-md overflow-hidden">
       <CardHeader className="bg-transparent px-6 pt-4 pb-24">
         <div className="flex items-center justify-between">
           <div>
@@ -29,6 +29,7 @@ const MyCard = () => {
         </div>
       </CardContent>
     </Card>
+
     
   );
 };
