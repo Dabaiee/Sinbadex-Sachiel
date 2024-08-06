@@ -21,7 +21,7 @@ const Header: React.FC = () => {
             className="flex items-center gap-2 text-lg font-semibold md:text-base"
           >
             <Package2 className="h-6 w-6" />
-            <span className="sr-only">Acme Inc</span>
+            <span className="text-2xl pe-4">Sinbad</span>
           </Link>
           <Link
             href="#"
@@ -33,13 +33,13 @@ const Header: React.FC = () => {
             href="#"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Insights
+            Markets
           </Link>
           <Link
             href="#"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Products
+            Votes
           </Link>
           <Link
             href="#"

@@ -14,7 +14,7 @@ import {
 import { useProtocol } from '@/contexts/ProtocolContext'
 
 const protocols = [
-  { value: "eth", label: "Ethereum Market", icon: "/icons/ethereum.png" },
+  { value: "eth", label: "Ethereum", icon: "/icons/ethereum.png" },
   { value: "base", label: "Base", icon: "/icons/ethereum.png" },
   { value: "arb", label: "Arbitrum", icon: "/icons/ethereum.png" },
   { value: "avax", label: "Avalanche", icon: "/icons/ethereum.png" },
@@ -30,20 +30,20 @@ export function ProtocolSelector() {
 
   return (
     <div>
-      <div className="justify-start">
+      <div className="">
         <Select value={selectedProtocol} onValueChange={setSelectedProtocol}>
-          <SelectTrigger className="w-[320px] text-3xl border-none">
+          <SelectTrigger className="ps-0 me-4 mb-4 text-3xl font-bold border-none">
             <SelectValue>
               {selectedProtocolData && (
                 <div className="flex items-center">
                   <Image 
                     src={selectedProtocolData.icon} 
-                    alt={selectedProtocolData.label} 
-                    width={24} 
-                    height={24} 
+                    alt={selectedProtocolData.label}
+                    width={32} 
+                    height={32} 
                     className="mr-2"
                   />
-                  {selectedProtocolData.label}
+                  {selectedProtocolData.label} Market
                 </div>
               )}
             </SelectValue>
