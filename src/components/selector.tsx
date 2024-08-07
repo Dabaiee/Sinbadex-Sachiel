@@ -32,7 +32,7 @@ export function ProtocolSelector() {
     <div>
       <div className="">
         <Select value={selectedProtocol} onValueChange={setSelectedProtocol}>
-          <SelectTrigger className="ps-0 me-4 mb-4 text-3xl font-bold border-none">
+          <SelectTrigger className="ps-0 me-4 mb-4 text-4xl font-bold border-none">
             <SelectValue>
               {selectedProtocolData && (
                 <div className="flex items-center">

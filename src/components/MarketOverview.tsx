@@ -9,7 +9,7 @@ export const MarketOverview: React.FC = () => {
   const { netWorth, apy } = protocolData[selectedProtocol];
 
   return (
-    <div className="flex flex-col justify-between items-start p-4 rounded-t-lg">
+    <div className="flex flex-col justify-between items-start p-4 rounded-t-lg ">
       <ProtocolSelector />
       <div className="flex space-x-4">
         <div>
