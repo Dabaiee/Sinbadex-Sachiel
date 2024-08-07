@@ -25,7 +25,7 @@ export const AssetsToBorrow = () => {
   const [assets] = useState<Asset[]>(dummyAssets);
 
   return (
-    <div className="bg-gray-800 rounded-lg p-4">
+    <div className="bg-zinc-900 rounded-lg p-4">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-white text-lg font-semibold">Assets to borrow</h2>
         <button className="text-gray-400 text-sm">Hide</button>
