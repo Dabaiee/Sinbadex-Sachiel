@@ -5,6 +5,7 @@ import { headers } from 'next/headers'
 import { cookieToInitialState } from 'wagmi'
 import { config } from '@/config'
 import ContextProvider from '@/context'
+import { ApolloWrapper } from '@/lib/apollo-wrapper'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ContextProvider initialState={initialState}>{children}</ContextProvider>
+        <ContextProvider initialState={initialState}>
+          <ApolloWrapper>
+            {children}
+          </ApolloWrapper>
+        </ContextProvider>
       </body>
     </html>
   );

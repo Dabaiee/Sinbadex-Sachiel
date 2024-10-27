@@ -107,7 +107,7 @@ export const YourSupplies = () => {
           <TableRow>
             <TableHead className="w-[100px]">Asset</TableHead>
             <TableHead>Balance</TableHead>
-            <TableHead>APY</TableHead>
+            <TableHead className="text-right">APY</TableHead>
             <TableHead className="text-right">Collateral</TableHead>
           </TableRow>
         </TableHeader>
@@ -129,7 +129,7 @@ export const YourSupplies = () => {
                 <div className='text-gray-500'>${prices[item.asset] ? (parseFloat(item.balance) * prices[item.asset]).toFixed(2) : 'Loading...'}</div>
                 
               </TableCell>
-              <TableCell>{item.apy}</TableCell>
+              <TableCell className="text-right">{item.apy}</TableCell>
               <TableCell className="text-right">
                 <Switch
                     checked={item.collateral}
