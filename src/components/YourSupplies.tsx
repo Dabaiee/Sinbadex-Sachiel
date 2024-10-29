@@ -6,14 +6,14 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import { Switch } from "@/components/ui/switch"
 import { Button } from './ui/button';
 import axios from 'axios';
-import Image from "next/image"
+import { NetworkLogo } from './NetworkLogo';
 
 interface Supply {
   asset: string;
   balance: string;
   apy: string;
   collateral: boolean;
-  icon: string;
+  tokenId: string; // 添加 CoinGecko API 使用的 token ID
 }
 
 interface Prices {
@@ -21,9 +21,27 @@ interface Prices {
 }
 
 const dummySupplies: Supply[] = [
-  { asset: 'ETH', balance: '0.0100087', apy: '1.90%', collateral: true , icon: "/icons/ethereum.png"},
-  { asset: 'BTC', balance: '0.00050087', apy: '2.50%', collateral: true , icon: "/icons/ethereum.png"},
-  { asset: 'LTC', balance: '0.2000087', apy: '1.75%', collateral: false , icon: "/icons/ethereum.png"},
+  { 
+    asset: 'ETH', 
+    balance: '0.0100087', 
+    apy: '1.90%', 
+    collateral: true,
+    tokenId: 'ethereum'
+  },
+  { 
+    asset: 'BTC', 
+    balance: '0.00050087', 
+    apy: '2.50%', 
+    collateral: true,
+    tokenId: 'bitcoin'
+  },
+  { 
+    asset: 'LTC', 
+    balance: '0.2000087', 
+    apy: '1.75%', 
+    collateral: false,
+    tokenId: 'litecoin'
+  },
 ];
 
 export const YourSupplies = () => {
@@ -36,9 +54,10 @@ export const YourSupplies = () => {
   useEffect(() => {
     const fetchPrices = async () => {
       try {
+        const tokenIds = supplies.map(supply => supply.tokenId).join(',');
         const response = await axios.get('https://api.coingecko.com/api/v3/simple/price', {
           params: {
-            ids: 'ethereum,bitcoin,litecoin',  // Add other assets here
+            ids: tokenIds,
             vs_currencies: 'usd',
           },
         });
@@ -50,9 +69,7 @@ export const YourSupplies = () => {
         setPrices(prices);
         setLoading(false);
 
-        // Calculate total values
         calculateValues(supplies, prices);
-
       } catch (error) {
         console.error('Error fetching prices:', error);
         setLoading(false);
@@ -60,7 +77,7 @@ export const YourSupplies = () => {
     };
 
     fetchPrices();
-  }, []);
+  }, [supplies]);
 
   const calculateValues = (supplies: Supply[], prices: Prices) => {
     let total = 0;
@@ -109,42 +126,44 @@ export const YourSupplies = () => {
             <TableHead>Balance</TableHead>
             <TableHead className="text-right">APY</TableHead>
             <TableHead className="text-right">Collateral</TableHead>
+            <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {dummySupplies.map((item, index) => (
+          {supplies.map((item, index) => (
             <TableRow key={index}>
               <TableCell className="flex items-center font-medium">
-                <Image 
-                      src={item.icon}
-                      alt={item.asset}
-                      width={32} 
-                      height={32} 
-                      className="mr-2"
-                    />
+                <NetworkLogo 
+                  token={item.tokenId}
+                  size={32}
+                  className="mr-2"
+                />
                 {item.asset}
               </TableCell>
               <TableCell>
                 <div>{item.balance}</div>
-                <div className='text-gray-500'>${prices[item.asset] ? (parseFloat(item.balance) * prices[item.asset]).toFixed(2) : 'Loading...'}</div>
-                
+                <div className='text-gray-500'>
+                  ${loading 
+                    ? 'Loading...' 
+                    : (parseFloat(item.balance) * (prices[item.asset] || 0)).toFixed(2)
+                  }
+                </div>
               </TableCell>
               <TableCell className="text-right">{item.apy}</TableCell>
               <TableCell className="text-right">
                 <Switch
-                    checked={item.collateral}
-                    onCheckedChange={(checked) => handleToggleCollateral(index, checked)}
-                  />
+                  checked={item.collateral}
+                  onCheckedChange={(checked) => handleToggleCollateral(index, checked)}
+                />
               </TableCell>
-              <TableCell>
-                <Button className="mr-2" variant="secondary">Switch</Button>
-                <Button className="" variant="outline">Withdraw</Button>
+              <TableCell className="text-right">
+                <Button className="mr-2" variant="secondary">Supply</Button>
+                <Button variant="outline">Withdraw</Button>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      
     </div>
   );
 };

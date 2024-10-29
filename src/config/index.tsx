@@ -1,5 +1,5 @@
+import { createWeb3Modal } from '@web3modal/wagmi/react'
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config'
-
 import { cookieStorage, createStorage } from 'wagmi'
 import { mainnet, sepolia } from 'wagmi/chains'
 
@@ -11,12 +11,13 @@ if (!projectId) throw new Error('Project ID is not defined')
 const metadata = {
   name: 'Sinbadex-Sachiel',
   description: 'Web3Modal Example',
-  url: 'https://web3modal.com', // origin must match your domain & subdomain
+  url: 'https://web3modal.com',
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 
 // Create wagmiConfig
 const chains = [mainnet, sepolia] as const
+
 export const config = defaultWagmiConfig({
   chains,
   projectId,
@@ -24,7 +25,15 @@ export const config = defaultWagmiConfig({
   ssr: true,
   storage: createStorage({
     storage: cookieStorage
-  }),
-  // ...wagmiOptions // Optional - Override createConfig parameters
+  })
+})
+
+// Create modal
+createWeb3Modal({
+  wagmiConfig: config,
+  projectId,
+  chains,
+  featuredWalletIds: [],
+  themeMode: 'dark'
 })
 
